@@ -1,6 +1,6 @@
 from typing import List
 
-all_tables = (
+all_tables = [
     {
         "Table Number": 1,
         "Table type": "Single",
@@ -61,7 +61,7 @@ all_tables = (
         "Reserved": False,
         "Surname": "",
     },
-)
+]
 
 
 class Tables:
@@ -70,7 +70,7 @@ class Tables:
 
     def check_reservetion(self, surname: str) -> bool:
         reserved_table = False
-        for table_data in self.all_tables_list():
+        for table_data in self.all_tables_list:
             for key, value in table_data.items():
                 if (
                     table_data["Reserved"] == True
@@ -82,7 +82,7 @@ class Tables:
 
     def reserve_table(self, type: str, surname: str) -> dict:
         free_table = False
-        for table_number, table_data in self.all_tables.items():
+        for table_data in self.all_tables_list:
             for key, value in table_data.items():
                 if table_data["Reserved"] == False and table_data["Table type"] == type:
                     table_data["Surname"] = surname
@@ -94,7 +94,7 @@ class Tables:
             return f"Sorry {surname}, there is no free {type} table right now"
 
     def short_check(self):
-        for table_number, table_data in self.all_tables.items():
+        for table_number, table_data in self.all_tables_list:
             # print(f"{table_number}")
 
             for key, value in table_data.items():
@@ -102,13 +102,13 @@ class Tables:
 
 
 def check_if_reserved(surname) -> bool:
-    my_table = Tables()
+    my_table = Tables(all_tables)
     reserved = my_table.check_reservetion(surname=surname)
     return reserved
 
 
 def reservation(table_type, surname) -> None:
-    my_table = Tables()
+    my_table = Tables(all_tables)
     table = my_table.reserve_table(type=table_type, surname=surname)
     if isinstance(table, dict):
         for items, values in table.items():
@@ -132,7 +132,7 @@ def main():
 
 
 main()
-
+# change
 
 # print(help(Tables))
 # main()
